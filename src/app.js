@@ -8,6 +8,13 @@ const resolvers = require("./resolvers/todoResolver");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.get("/", (req, res) => {
+    res.send("Server is running");
+});
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
+
 const user = process.env.MONGO_USER
 const password = process.env.MONGO_PASSWORD
 
@@ -21,8 +28,8 @@ async function startServer() {
         useUnifiedTopology: true,
     });
 
-    app.listen(PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}${server.graphqlPath}`);
+    app.listen(PORT, '0.0.0.0', () => {
+        console.log(`Server is running on port ${PORT}`);
     });
 }
 
