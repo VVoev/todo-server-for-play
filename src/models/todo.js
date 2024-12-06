@@ -5,6 +5,11 @@ const todoSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    priority: {
+        type: String,
+        enum: ['LOW', 'MEDIUM', 'HIGH'],
+        default: 'LOW',
+    },
     description: String,
     completed: {
         type: Boolean,
@@ -12,7 +17,11 @@ const todoSchema = new mongoose.Schema({
     },
     createdAt: {
         type: String,
-        default: new Date().toISOString(),
+        default: new Date().toISOString()
+    },
+    updatedAt: {
+        type: String,
+        default: null
     },
 });
 
